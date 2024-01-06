@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #3498db, #2c3e50); /* Gradient background */
+            color: white; /* Updated text color */
+        }
+        header {
+            background-color: #2980b9; /* Updated header color */
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        .about-me {
+            background-color: #3498db; /* Updated background color for About Me section */
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .about-me h2 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .about-me p {
+            color: #ecf0f1; /* Lighter text color for better readability */
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            background-color: #34495e; /* Updated tab background color */
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .tab:hover {
+            background-color: #2c3e50; /* Darker color on hover */
+        }
+        .skills, .projects, .contact-info {
+            display: none;
+        }
+        .skills.show, .projects.show, .contact-info.show {
+            display: block;
+        }
+        .skills .skill, .project-tab, .contact-info p {
+            background-color: #d9dada; /* Updated tab button color */
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            text-align: center;
+            color: rgb(243, 4, 4);
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .skills .skill:hover, .project-tab:hover, .contact-info p:hover {
+            background-color: #297fb8; /* Darker color on hover */
+        }
+        .skills .skill img {
+            width: 50px; /* Adjust the size as needed */
+            height: 50px; /* Adjust the size as needed */
+            margin-bottom: 10px;
+        }
+        .projects .project-details {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #34495e; /* Updated project details background color */
+            border-radius: 8px;
+        }
+        .contact-info a {
+            color: #000000; /* Updated link color */
+        }
+        .about-me:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+        .tab:hover, .project-tab:hover {
+            background-color: #2c3e50;
+            color: #ecf0f1; /* Lighter text color on hover */
+        }
+        .skills .skill::before {
+            font-family: 'Font Awesome 5 Free';
+            content: '\f5de'; /* Adjust the icon code as needed */
+            margin-right: 10px;
+            color: #3498db;
+        }
+        .contact-info i {
+            margin-right: 5px;
+        }
+        .about-me:hover {
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), #3498db;
+        }
+        .skills .skill::before {
+            font-family: 'Font Awesome 5 Free';
+            content: '\f5de'; /* Adjust the icon code as needed */
+            margin-right: 10px;
+            color: #3498db;
+            animation: iconHover 0.3s ease-in-out infinite alternate;
+        }
+        @keyframes iconHover {
+            to {
+                transform: translateY(-2px);
+            } 
+        }
+        .skills, .projects, .contact-info {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .skills.show, .projects.show, .contact-info.show {
+            opacity: 1;
+        }
+        .project-tab {
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        .project-tab:hover {
+            transform: scale(1.05);
+        }
+        h2, h3 {
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+        }
+        .about-me {
+            position: relative;
+            overflow: hidden;
+        }
+        .about-me::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2c3e50, #3498db);
+            z-index: -1;
+            animation: gradientAnimation 5s infinite linear;
+        }
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .project-tab {
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, background 0.3s ease;
+            background: linear-gradient(45deg, #3498db, #2c3e50);
+            color: #ecf0f1;
+            border: none;
+            border-radius: 8px;
+            position: relative;
+        }
+        .project-tab:hover {
+            transform: scale(1.05);
+        }
+        .project-tab::after {
+            content: '\f09b'; /* GitHub icon unicode */
+            font-family: 'Font Awesome 5 Free';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .project-tab:hover::after {
+            opacity: 1;
+        }
+        .project-details {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #34495e; /* Updated project details background color */
+            border-radius: 8px;
+        }
+
+        .section-border {
+            border: 2px solid #2980b9;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .about-me, .tabs, .skills, .projects, .contact-info {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        .tabs .tab:hover {
+            background: linear-gradient(45deg, #3498db, #2c3e50);
+            color: #ecf0f1;
+        }
+        .skills .skill:hover {
+            transform: scale(1.05);
+            background-color: #297fb8; /* Darker color on hover */
+            color: white;
+        }
+        .project-tab:hover {
+            transform: scale(1.05);
+        }
+        .about-me:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease, background 0.3s ease;
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), #3498db;
+        }
+        .projects h2 {
+            text-align: center;
+        }
+        @keyframes gradientHover {
+            to {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+                }   
+        }
+        @keyframes scaleUp {
+            to {
+            transform: scale(1.05);
+                }
+        }
+        body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <header>My Portfolio</header>
+    <main>
+        <section class="about-me">
+            <h2>About Me</h2>
+            <p>Hello there! I'm Aneesh Kulkarni, a data enthusiast currently enrolled in BE ENTC. Passionate about deciphering data puzzles, I thrive on turning information into captivating stories. Let's embark on a journey where every data point tells a tale!</p>
+        </section>
+        <div class="tabs">
+            <div class="tab" onclick="showSection('skills')">Skills</div>
+            <div class="tab" onclick="showSection('projects')">Projects</div>
+            <div class="tab" onclick="showSection('contact-info')">Contact Information</div>
+        </div>
+        <section class="skills">
+            <h2>Skills</h2>
+            <div class="skill">
+                <img src="C:\Users\aneesh\Desktop\Internship\portfolio\ml.png" alt="Python Icon">
+                Python
+            </div>
+            <div class="skill">
+                <img src="C:\Users\aneesh\Desktop\Internship\portfolio\python1.png" alt="Machine Learning Icon">
+                Machine Learning
+            </div>
+            <div class="skill">
+                <img src="C:\Users\aneesh\Desktop\Internship\portfolio\datascie.png" alt="Data Science Icon">
+                Data Science
+            </div>
+            <div class="skill">
+                <img src="C:\Users\aneesh\Desktop\Internship\portfolio\data-analysis.png" alt="Data Analysis Icon">
+                Data Analysis
+            </div>
+            <div class="skill">
+                <img src="C:\Users\aneesh\Desktop\Internship\portfolio\4248443.png" alt="SQL Icon">
+                SQL
+            </div>
+        </section>
+        <section class="projects">
+            <h2>Projects</h2>
+            <div class="project-tab" onclick="window.open('https://github.com/Aneesh1703/Heart-Attack-Prediction', '_blank')">
+                Heart Attack Prediction
+            </div>
+            <div class="project-tab" onclick="window.open('https://github.com/Aneesh1703/Zomato-Analysis', '_blank')">
+                Zomato Analysis
+            </div>
+            <div class="project-tab" onclick="window.open('https://github.com/Aneesh1703/Netflix-Stock-Price-Prediction', '_blank')">
+                Netflix Stock Price Prediction
+            </div>
+            <div class="project-tab" onclick="window.open('https://github.com/Aneesh1703/House-Price-Predictor', '_blank')">
+                House Price Predictor
+            </div>
+            <div class="project-tab" onclick="window.open('https://github.com/Aneesh1703/Sales-Prediction', '_blank')">
+                Sales Prediction
+            </div>
+            <div class="project-tab" onclick="window.open('Your Smart Irrigation System GitHub link', '_blank')">
+                Smart Irrigation System
+            </div>
+            <!-- Add more project details here -->
+        </section>
+        <section class="contact-info">
+            <h2>Contact Information</h2>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/aneesh-kulkarni1703" target="_blank">My LinkedIn Profile</a></p>
+            <p>Gmail: <a href="aneeshkul17@gmail.com" target="_blank">My Gmail</a></p>
+            <!-- Add more contact information as needed -->
+        </section>
+    </main>
+    <script>
+        function showSection(section) {
+            const sections = document.querySelectorAll('.skills, .projects, .contact-info');
+            sections.forEach(s => s.classList.remove('show'));
+            document.querySelector(`.${section}`).classList.add('show');
+        }
+
+        function showProject(projectId) {
+            const projects = document.querySelectorAll('.project-details');
+            projects.forEach(project => {
+                project.style.display = 'none';
+            });
+
+            const selectedProject = document.getElementById(projectId);
+            if (selectedProject) {
+                selectedProject.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
